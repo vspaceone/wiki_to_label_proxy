@@ -1,7 +1,7 @@
 import logging
 logger = logging.getLogger(__name__)
 
-from labelprinter import print_label
+import wtl_proxy.labelprinter as lp
 from aiohttp import web
 from os import environ
 
@@ -18,12 +18,12 @@ async def post_print(request):
 		logger.info("missing fields")
 		return web.Response(status=400, text="missing field(s)")
 	try:
-		job = make_printjob(title=data["title"], url=data["url"])
+		job = lp.make_printjob(title=data["title"], url=data["url"])
 	except Exception as e:
 		logger.error(e)
 		return web.Response(status=500, text="error in making printjob")
 	try:
-		send_printjob(job)
+		lp.send_printjob(job)
 	except Exception as e:
 		logger.error(e)
 		return web.Response(status=500, text="error in sending print")

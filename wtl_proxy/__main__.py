@@ -1,7 +1,5 @@
 import logging
-import sys
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
 
 #check if valid env
 from os import environ
@@ -17,6 +15,6 @@ except IOError:
     logger.error("Template unreadable")
     quit()
 
-import proxy as wtl
+#run proxy
 wtl.start_proxy()
 logging.shutdown()
