@@ -16,5 +16,6 @@ except IOError:
     quit()
 
 #run proxy
+import wtl_proxy.proxy as wtl
 wtl.start_proxy()
 logging.shutdown()
