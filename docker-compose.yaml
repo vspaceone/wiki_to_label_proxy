@@ -2,6 +2,7 @@ version: "3.3"
 services:
    wtl_proxy:
     build: wtl_proxy
+    #image: ghcr.io/vspaceone/wiki_to_label_proxy:release
     container_name: wtl_proxy
     user: 1000:1000
     ports:
