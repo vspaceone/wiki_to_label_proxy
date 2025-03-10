@@ -4,10 +4,14 @@ logger = logging.getLogger(__name__)
 import wtl_proxy.labelprinter as lp
 from aiohttp import web
 from os import environ
+from html import escape as html_escape
 
 async def get_root(request):
 	logger.debug("root page")
-	return web.Response(text="<html><head><title>Wiki-to-Label</title></head><body><form method='POST' action='/print'><label for='title'>Title</label>: <input name='title'><br><label for='url'>Wiki-URL</label>: <input name='url' type='url'><br><input type='submit'></form></body></html>", content_type="text/html")
+	title=html_escape(request.query.get("title",""))
+	url=html_escape(request.query.get("url",""))
+    
+	return web.Response(text=f"<html><head><title>Wiki-to-Label</title></head><body><form method='POST' action='/print'><label for='title'>Title</label>: <input name='title' value='{title}'><br><label for='url'>Wiki-URL</label>: <input name='url' type='url' value='{url}'><br><input type='submit'></form></body></html>", content_type="text/html")
 async def get_ident(request):
 	logger.debug("ident")
 	return web.Response(text="Wiki-to-Label")
