@@ -21,7 +21,7 @@ def make_printjob(title,url):
 	for badchar in ["\n","\r",";"]:
 		if badchar in title or badchar in url:
 			logger.warning("possible injection attempt")
-			return 
+			raise ValueError("invalid characters")
 	with open(environ.get('CAB_TEMPLATE'), "r") as tf:
 		templ=tf.read()
 	job=templ.replace("%TITLE%",title).replace("%URL%",url)

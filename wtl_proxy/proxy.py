@@ -19,10 +19,14 @@ async def post_print(request):
 		return web.Response(status=400, text="missing field(s)")
 	try:
 		job = make_printjob(title=data["title"], url=data["url"])
+	except Exception as e:
+		logger.error(e)
+		return web.Response(status=500, text="error in making printjob")
+	try:
 		send_printjob(job)
 	except Exception as e:
 		logger.error(e)
-		return web.Response(status=500, text="internal error")
+		return web.Response(status=500, text="error in sending print")
 	return web.Response(text="OK")
 
 
