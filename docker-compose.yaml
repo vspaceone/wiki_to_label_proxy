@@ -1,7 +1,7 @@
 version: "3.3"
 services:
    wtl_proxy:
-    build: .
+    build: wtl_proxy
     container_name: wtl_proxy
     user: 1000:1000
     ports:
