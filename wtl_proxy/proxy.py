@@ -18,7 +18,8 @@ async def post_print(request):
 		logger.info("missing fields")
 		return web.Response(status=400, text="missing field(s)")
 	try:
-		print_label(title=data["title"], url=data["url"])
+		job = make_printjob(title=data["title"], url=data["url"])
+		send_printjob(job)
 	except Exception as e:
 		logger.error(e)
 		return web.Response(status=500, text="internal error")

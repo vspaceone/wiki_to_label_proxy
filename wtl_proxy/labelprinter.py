@@ -5,8 +5,9 @@ from ftplib import FTP
 from os import environ
 from io import StringIO
 
-def send_printfile(fp):
+def send_printjob(job):
 	logger.debug("Sending printjob...")
+	fp = StringIO(job)
 	ip = environ.get('CAB_HOST')
 	user = environ.get('CAB_USER')
 	pin = environ.get('CAB_PIN')
@@ -16,7 +17,7 @@ def send_printfile(fp):
 	ftp.storbinary("STOR job.txt", fp)
 	logger.debug("Sent printjob.")
 
-def print_label(title,url):
+def make_printjob(title,url):
 	for badchar in ["\n","\r",";"]:
 		if badchar in title or badchar in url:
 			logger.warning("possible injection attempt")
@@ -25,5 +26,4 @@ def print_label(title,url):
 		templ=tf.read()
 	job=templ.replace("%TITLE%",title).replace("%URL%",url)
 	logger.debug("Generated Printjob:\n" + job)
-	buffer = StringIO(job)
-	#send_printfile(buffer)
+	return job
