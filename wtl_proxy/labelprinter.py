@@ -1,24 +1,19 @@
 import logging
 logger = logging.getLogger(__name__)
 
-from ftplib import FTP
+import socket
 from os import environ
 from io import StringIO
 from asyncio import Lock
 
-ftp_lock = Lock()
 async def send_printjob(job):
 	logger.debug("Waiting for lock release...")
-	async with ftp_lock:
-		logger.debug("Sending printjob...")
-		fp = StringIO(job)
-		ip = environ.get('CAB_HOST')
-		user = environ.get('CAB_USER')
-		pin = environ.get('CAB_PIN')
-		ftp = FTP(ip)
-		ftp.login(user, pin, "")
-		ftp.cwd("execute")
-		ftp.storbinary("STOR job.txt", fp)
+
+	logger.debug("Sending printjob...")
+	ip = environ.get('CAB_HOST')
+	with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+		sock.connect((ip,9100))
+		sock.sendall(job.encode('utf-8'))
 		logger.debug("Sent printjob.")
 		return True
 

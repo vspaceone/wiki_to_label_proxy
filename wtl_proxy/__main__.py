@@ -3,7 +3,7 @@ logger = logging.getLogger(__name__)
 
 #check if valid env
 from os import environ
-for ev in ["CAB_HOST","CAB_USER","CAB_PIN","CAB_TEMPLATE"]:
+for ev in ["CAB_HOST","CAB_TEMPLATE"]:
     if environ.get(ev) == None:
         logger.error("Missing %s in environment!", ev)
         quit()
