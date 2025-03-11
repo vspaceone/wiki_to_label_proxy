@@ -18,12 +18,25 @@ async def send_printjob(job):
 		return True
 
 def make_printjob(title,url):
+	#check for invalid characters
 	for badchar in ["\n","\r",";"]:
 		if badchar in title or badchar in url:
 			logger.warning("possible injection attempt")
 			raise ValueError("invalid characters")
+	#read template
 	with open(environ.get('CAB_TEMPLATE'), "r") as tf:
-		templ=tf.read()
-	job=templ.replace("%TITLE%",title).replace("%URL%",url)
+		job=tf.read()
+	#fill in URL
+	job=job.replace("%URL%",url)
+	#figure out what char to split by
+	splitchar=" "#default
+	splitchar_list=(" ", ":", "_", "-") #leftmost has highest priority
+	for c in splitchar_list:
+		if c in title:
+			splitchar=c
+			break
+	title_parts=title.split(splitchar)#split title into lines
+	for n in range(min(4,len(title_parts))): #fill in the (up to) 4 lines
+		job=job.replace(f"%TITLE{n+1}%",title_parts[n])
 	logger.debug("Generated Printjob:\n" + job)
 	return job

@@ -10,7 +10,5 @@ services:
     restart: unless-stopped
     environment:
         CAB_HOST: "wtl_cab_labelprinter.int.vspace.one"
-        CAB_USER: wtl
-        CAB_PIN: 424242
-        CAB_TEMPLATE: "/app/templates/ERT-A038X023-1B-1500  simple.txt"
+        CAB_TEMPLATE: "/app/templates/ERT-A038X023-1B-1500_simple.txt"
 
