@@ -7,8 +7,6 @@ from io import StringIO
 from asyncio import Lock
 
 async def send_printjob(job):
-	logger.debug("Waiting for lock release...")
-
 	logger.debug("Sending printjob...")
 	ip = environ.get('CAB_HOST')
 	with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
@@ -36,7 +34,10 @@ def make_printjob(title,url):
 			splitchar=c
 			break
 	title_parts=title.split(splitchar)#split title into lines
-	for n in range(min(4,len(title_parts))): #fill in the (up to) 4 lines
-		job=job.replace(f"%TITLE{n+1}%",title_parts[n])
+	for n in range(4): #fill in the (up to) 4 lines
+		line=""
+		if n<len(title_parts):
+			line=title_parts[n]
+		job=job.replace(f"%TITLE{n+1}%",line)
 	logger.debug("Generated Printjob:\n" + job)
 	return job
