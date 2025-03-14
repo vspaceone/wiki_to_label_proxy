@@ -6,7 +6,7 @@ from os import environ
 from io import StringIO
 from asyncio import Lock
 
-async def send_printjob(job):
+def send_printjob(job):
 	logger.debug("Sending printjob...")
 	ip = environ.get('CAB_HOST')
 	with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:

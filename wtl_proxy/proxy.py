@@ -10,7 +10,7 @@ async def get_root(request):
 	logger.debug("root page")
 	title=html_escape(request.query.get("title",""))
 	url=html_escape(request.query.get("url",""))
-    
+	
 	return web.Response(text=f"<html><head><title>Wiki-to-Label</title></head><body><form method='POST' action='/print'><label for='title'>Title</label>: <input name='title' value='{title}'><br><label for='url'>Wiki-URL</label>: <input name='url' type='url' value='{url}'><br><input type='submit'></form></body></html>", content_type="text/html")
 async def get_ident(request):
 	logger.debug("ident")
@@ -20,17 +20,19 @@ async def post_print(request):
 	logger.debug("Incoming print request: " + str(data))
 	if "title" not in data or "url" not in data:
 		logger.info("missing fields")
-		return web.Response(status=400, text="missing field(s)")
+		return web.Response(status=400, text="ERROR: missing field(s)")
 	try:
 		job = lp.make_printjob(title=data["title"], url=data["url"])
 	except Exception as e:
-		logger.error(e)
-		raise e #return web.Response(status=500, text="error in making printjob")
+		logger.error("%s: %s", type(e), e)
+		return web.Response(status=500, text="ERROR in making printjob")
 	try:
-		await lp.send_printjob(job)
+		lp.send_printjob(job)
+	except TimeoutError:
+		return web.Response(status=500, text="ERROR: connection to printer timed out. check if it is online.")
 	except Exception as e:
-		logger.error(e)
-		return web.Response(status=500, text="error in sending print")
+		logger.error("%s: %s", type(e), e)
+		return web.Response(status=500, text="ERROR in sending print")
 	return web.Response(text="OK")
 
 
