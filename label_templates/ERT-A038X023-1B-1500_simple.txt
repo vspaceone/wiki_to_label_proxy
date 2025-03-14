@@ -1,17 +1,19 @@
 e IMG;*
-; CREATED: 12/03/2025 02:22:51, Driver version: 1.0.7.3, Target model: Mach4/300
+; CREATED: 14/03/2025 00:50:55, Driver version: 1.0.7.3, Target model: Mach4/300
+; CHAR_LINES=5
+; CHAR_MAX=12
 m m
 zO
 J Wiki-Label
-j 3175363819784741
-S l1;0,0,23,26,38;Wiki-Label
+j 3175372404203512
+S l1;0,-1.5,23,26,38;Wiki-Label
 H 75,3,T,R0,B0
 O R,T,P
-T:Title;29.11,22.37,90,3,3,k;%TITLE1%
-T:Titlea;31.8,22.37,90,3,3,k;%TITLE2%
-T:Titleb;34.48,22.37,90,3,3,k;%TITLE3%
-T:Titlec;37.17,22.37,90,3,3,k;%TITLE4%
-T:WikiDom;3.12,23,90,3,3,k;[J:c23]wiki.vspace.one
-B:QR_URL;5.55,19.3,90,qrcode+WS1+ELM+MODEL2,0.46;%URL%
+T:Title;28.46,22.37,90,596,3,k;%TITLE1%
+T:Titlea;30.69,22.37,90,596,3,k;%TITLE2%
+T:Titleb;32.92,22.37,90,596,3,k;%TITLE3%
+T:Titlec;35.15,22.37,90,596,3,k;%TITLE4%
+T:Titled;37.39,22.37,90,596,3,k;%TITLE5%
+T:WikiDom;2.61,23,90,3,3,k;[J:c23]wiki.vspace.one
+B:QR_URL;5.19,19.3,90,qrcode+WS1+ELM+MODEL2,0.46;%URL%
 A 1
-

@@ -25,7 +25,7 @@ async def post_print(request):
 		job = lp.make_printjob(title=data["title"], url=data["url"])
 	except Exception as e:
 		logger.error(e)
-		return web.Response(status=500, text="error in making printjob")
+		raise e #return web.Response(status=500, text="error in making printjob")
 	try:
 		await lp.send_printjob(job)
 	except Exception as e:

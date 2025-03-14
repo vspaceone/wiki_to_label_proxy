@@ -8,9 +8,15 @@ for ev in ["CAB_HOST","CAB_TEMPLATE"]:
         logger.error("Missing %s in environment!", ev)
         quit()
 #check if template readable
+from wtl_proxy.labelprinter import get_template_text_params
 try:
     with open(environ.get("CAB_TEMPLATE")) as fp:
-        fp.read()
+        templ=fp.read()
+        param=get_template_text_params(templ)
+        for p in ("CHAR_LINES","CHAR_MAX"):
+            if p not in param:
+                logger.error("Template missing param " + p)
+                quit()
 except IOError:
     logger.error("Template unreadable")
     quit()
