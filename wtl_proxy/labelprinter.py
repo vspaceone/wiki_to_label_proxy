@@ -5,6 +5,7 @@ import socket
 from os import environ
 from io import StringIO
 from asyncio import Lock
+import math
 
 def send_printjob(job):
 	logger.debug("Sending printjob...")
@@ -86,7 +87,9 @@ def make_printjob(title,url):
 	for n in range(n_lines): #fill in the (up to) n lines
 		line=""
 		if n<len(title_parts):
-			line=title_parts[n]
+			part=title_parts[n]
+			padding=math.floor((max_char-len(part))/2) #calculate padding for centering
+			line=" "*padding + part #center text
 		job=job.replace(f"%TITLE{n+1}%",line)
 	logger.debug("Generated Printjob:\n" + job)
 	return job
