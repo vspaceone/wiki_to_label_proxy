@@ -50,6 +50,8 @@ def string_to_lines(string_parts,max_char,max_lines):
 		for part in string_parts:
 			if len(part)>max_char: #if part to long
 				idx=part.rfind(splitchar,0,max_char) #find last possible split location
+				if idx<0: #check rest of string
+					idx=part.find(splitchar)
 				logger.debug("split idx: %d",idx)
 				if idx>=0:#if split location found, add split parts to new part list
 					new_string_parts.append(part[:idx])
