@@ -38,11 +38,12 @@ def string_to_lines(string_parts,max_char,max_lines):
 	#figure out what char to split by
 	splitchar=None
 	splitchar_list=(" ", ":", "_", "-") #leftmost has highest priority
-	raw_string="".join(string_parts)#join parts together for easier searching
-	for c in splitchar_list:
-		if c in raw_string:
-			splitchar=c
-			break
+	for part in sorted(string_parts,reverse=True,key=lambda x: len(x)):
+		if len(part) > max_char:
+			for c in splitchar_list:
+				if c in part:
+					splitchar=c
+					break
 	logger.debug("splitchar: '%s'",str(splitchar))
 	if splitchar == None: #if unsplittable by splitchar
 		return string_parts #give up, TODO: implement splitting mid-word
