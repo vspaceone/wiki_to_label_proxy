@@ -6,14 +6,14 @@ m m
 zO
 J Wiki-Label
 j 3175372404203512
-S l1;0,-1.5,23,26,38;Wiki-Label
+S l1;0,0,23,26,38;Wiki-Label
 H 75,3,T,R0,B0
 O R,T,P
-T:Title;28.46,22.37,90,596,3,k;%TITLE1%
-T:Titlea;30.69,22.37,90,596,3,k;%TITLE2%
-T:Titleb;32.92,22.37,90,596,3,k;%TITLE3%
-T:Titlec;35.15,22.37,90,596,3,k;%TITLE4%
-T:Titled;37.39,22.37,90,596,3,k;%TITLE5%
-T:WikiDom;2.61,23,90,3,3,k;[J:c23]wiki.vspace.one
-B:QR_URL;5.19,19.3,90,qrcode+WS1+ELM+MODEL2,0.46;%URL%
+T:Title;28.46,21.37,90,596,3,k;%TITLE1%
+T:Titlea;30.69,21.37,90,596,3,k;%TITLE2%
+T:Titleb;32.92,21.37,90,596,3,k;%TITLE3%
+T:Titlec;35.15,21.37,90,596,3,k;%TITLE4%
+T:Titled;37.39,21.37,90,596,3,k;%TITLE5%
+T:WikiDom;2.61,22,90,3,3,k;[J:c23]wiki.vspace.one
+B:QR_URL;5.19,18.3,90,qrcode+WS1+ELM+MODEL2,0.46;%URL%
 A 1
